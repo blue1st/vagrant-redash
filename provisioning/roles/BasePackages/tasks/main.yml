@@ -1,0 +1,6 @@
+---
+- include : add-repositories.yml
+  become  : yes
+
+- include : install-packages.yml
+  become  : yes

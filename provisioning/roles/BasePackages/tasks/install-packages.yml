@@ -1,0 +1,20 @@
+---
+- name: Install build tools
+  yum:
+    name: "@Development Tools"
+
+- name: Install base packages
+  yum: name={{item}}
+  with_items:
+    - python-pip
+    - python-devel
+    - nginx
+    - curl
+    - pwgen
+    - kernel-devel
+    - kernel-headers
+
+- name: Update setuptools
+  pip:
+    name: setuptools
+    state: latest
