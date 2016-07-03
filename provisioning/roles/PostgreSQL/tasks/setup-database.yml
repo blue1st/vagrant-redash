@@ -1,0 +1,16 @@
+---
+- name      : Check database initialized
+  stat      :
+    path    : /var/lib/pgsql/9.4/data/postgresql.conf
+  register  : database_initialized
+
+- name      : Initialize database
+  shell     : /usr/pgsql-9.4/bin/postgresql94-setup initdb
+  when      : not database_initialized.stat.exists
+  notify    : Restart PostgreSQL
+
+- name      : Change config file
+  template  :
+    src     : postgresql.conf.j2
+    dest    : /var/lib/pgsql/9.4/data/postgresql.conf
+  notify    : Restart PostgreSQL

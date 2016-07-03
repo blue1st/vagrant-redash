@@ -12,8 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # synced fonder
   config.vm.synced_folder ".", "/vagrant", :mount_options => ['dmode=775', 'fmode=664']
 
-  # port forward
-  config.vm.network :forwarded_port, guest: 80, host: 80
+  # port forwardsu
+  config.vm.network :forwarded_port, guest: 80, host: 80        # nginx
+  config.vm.network :forwarded_port, guest: 5432, host: 5432    # PostgreSQL
 
   # Enable Provisioning
   config.vm.provision "ansible_local" do |ansible|
