@@ -2,11 +2,11 @@
 - include_vars  : timezone-vars.yml
 
 - name          : Check Timezone
-  command       : timedatectl | grep "Time zone"
+  shell         : timedatectl status | grep "Time zone"
   register      : current_timezone
   ignore_errors : yes
 
-- name    : set timezone
-  become  : yes
-  command : timedatectl set-timezone {{ timezone }}
-  when    : not {{ timezone }} in current_timezone.stdout
+- name          : set timezone
+  become        : yes
+  command       : timedatectl set-timezone {{ timezone }}
+  when          : not '{{ timezone }}' in current_timezone.stdout
