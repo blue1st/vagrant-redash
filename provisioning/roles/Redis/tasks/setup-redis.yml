@@ -1,0 +1,16 @@
+---
+- name : Create Redis data dir
+  file  :
+    path:  /var/lib/redis/6379
+    state: directory
+  become: yes
+  become_user: redis
+
+- name: Setup memory setting
+  command: sysctl vm.overcommit_memory=1
+
+- name  : Change config file
+  template :
+    src: redis.conf.j2
+    dest: /etc/redis.conf
+  notify: Restart Redis

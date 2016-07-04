@@ -1,0 +1,5 @@
+---
+- include: install-redis.yml
+  become: yes
+- include: setup-redis.yml
+  become: yes
