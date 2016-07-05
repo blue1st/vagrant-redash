@@ -13,6 +13,10 @@
     - pwgen
     - kernel-devel
     - kernel-headers
+    - libffi
+    - libffi-devel
+    - openssl
+    - openssl-devel
 
 - name: Update setuptools
   pip:
