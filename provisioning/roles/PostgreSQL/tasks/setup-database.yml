@@ -14,3 +14,9 @@
     src     : postgresql.conf.j2
     dest    : /var/lib/pgsql/9.4/data/postgresql.conf
   notify    : Restart PostgreSQL
+
+- name      : Change config file
+  template  :
+    src     : pg_hba.conf.j2
+    dest    : /var/lib/pgsql/9.4/data/pg_hba.conf
+  notify    : Restart PostgreSQL
