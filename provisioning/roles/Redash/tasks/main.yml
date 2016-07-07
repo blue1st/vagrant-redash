@@ -1,0 +1,33 @@
+---
+- include_vars: redash-versions.yml
+
+- include     : add-user.yml
+  become      : yes
+
+- include     : create-directories.yml
+  become      : yes
+
+- name        : Check installed current version
+  stat        :
+    path      : /opt/redash/redash.{{ redash_version }}
+  become      : yes
+  become_user : redash
+  register    : installed_redash
+
+- include     : install-redash.yml
+  become      : yes
+  become_user : redash
+  when        : not installed_redash.stat.exists
+
+- include     : install-required-modules.yml
+  become      : yes
+
+- include     : create-database.yml
+
+- include     : create-admin-user.yml
+  become      : yes
+  become_user : redash
+
+- include     : create-readonly-user.yml
+- include     : setup-supervisor.yml
+- include     : setup-nginx.yml

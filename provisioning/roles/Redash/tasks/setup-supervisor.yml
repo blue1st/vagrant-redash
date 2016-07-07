@@ -1,0 +1,19 @@
+---
+- name: Install supervisor
+  yum:
+    name: supervisor
+  become: yes
+
+- name: Create supervisor dir
+  file:
+    path: /opt/redash/supervisord
+    state: directory
+  become: yes
+  become_user: redash
+
+- name: Create supervisor setting file
+  template:
+    src: supervisord.conf.j2
+    dest: /etc/supervisord.conf
+  become: yes
+  notify: Restart supervisor

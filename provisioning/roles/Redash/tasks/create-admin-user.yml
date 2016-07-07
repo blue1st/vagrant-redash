@@ -1,0 +1,16 @@
+---
+- name    : Check created Re:dash admin user
+  stat    :
+    path  : /opt/redash/created_admin_user
+  register: created_admin_user
+
+- name    : Create admin user
+  command : bin/run ./manage.py users create --admin --password admin "Admin" "admin"
+  args    :
+    chdir : /opt/redash/current
+  when    : not created_admin_user.stat.exists
+
+- name    : Create file for check
+  file    :
+    path  : /opt/redash/created_admin_user
+    state : file

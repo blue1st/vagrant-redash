@@ -1,0 +1,6 @@
+---
+- name          : Install required modules
+  pip           :
+    requirements: /opt/redash/current/requirements.txt
+  environment   :
+    PATH        : /sbin:/bin:/usr/sbin:/usr/bin:/usr/pgsql-9.4/bin/

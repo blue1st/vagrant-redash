@@ -1,0 +1,13 @@
+---
+- name: Delete default.conf
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+  become: yes
+
+- name: Create redash.conf
+  template:
+    src : nginx-redash.conf.j2
+    dest: /etc/nginx/conf.d/redash.conf
+  become: yes
+  notify: Restart nginx

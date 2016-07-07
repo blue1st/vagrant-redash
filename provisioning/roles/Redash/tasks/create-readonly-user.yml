@@ -1,0 +1,43 @@
+---
+- name: Check created readonly user
+  command: psql postgres -tAc "SELECT COUNT(*) FROM pg_roles WHERE rolname='redash_reader'"
+  become: yes
+  become_user: postgres
+  register: created_readonly_user
+
+- name: Create redash_reader password
+  command: pwgen -1
+  register: redash_reader_password
+  when: created_readonly_user.stdout == '0'
+
+- name: Create readash_reader user
+  command: psql -c "CREATE ROLE redash_reader WITH PASSWORD '{{ redash_reader_password.stdout }}' NOCREATEROLE NOCREATEDB NOSUPERUSER LOGIN"
+  become: yes
+  become_user: postgres
+  when: created_readonly_user.stdout == '0'
+
+- name: Set datasources grant to readash_reader
+  command: psql -c "GRANT select(id, name, type) ON data_sources TO redash_reader;" redash
+  become: yes
+  become_user: redash
+  when: created_readonly_user.stdout == '0'
+
+- name: Set user grant to readash_reader
+  command: psql -c "GRANT select(id, name) ON users TO redash_reader;" redash
+  become: yes
+  become_user: redash
+  when: created_readonly_user.stdout == '0'
+
+- name: Set other grant to readash_reader
+  command: psql -c "GRANT select on events, queries, dashboards, widgets, visualizations, query_results to redash_reader;" redash
+  become: yes
+  become_user: redash
+  when: created_readonly_user.stdout == '0'
+
+- name: Create metadata
+  command: bin/run ./manage.py ds new -n "re:dash metadata" -t "pg" -o "{\"user\":\"redash_reader\",\"password\":\"{{ redash_reader_password.stdout }}\",\"host\":\"localhost\",\"dbname\":\"redash\"}"
+  args:
+    chdir     : /opt/redash/current
+  become      : yes
+  become_user : redash
+  when: created_readonly_user.stdout == '0'

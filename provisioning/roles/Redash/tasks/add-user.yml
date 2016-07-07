@@ -1,0 +1,7 @@
+---
+- name          : Add Re:dash login user
+  user          :
+    name        : redash
+    system      : yes
+    createhome  : no
+    shell       : /sbin/nologin

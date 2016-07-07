@@ -1,0 +1,12 @@
+---
+- name    : Create Re:dash install directory
+  file    :
+    path  : /opt/redash/
+    state : directory
+    owner : redash
+
+- name    : Create Re:dash log directory
+  file    :
+    path  : /opt/redash/logs
+    state : directory
+    owner : redash
