@@ -7,4 +7,5 @@
     - BasePackages
     - PostgreSQL
     - Redis
+    - MySQL
     - Redash

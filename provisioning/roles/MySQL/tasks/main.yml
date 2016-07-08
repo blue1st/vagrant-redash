@@ -1,0 +1,5 @@
+---
+- include : install-5.7.yml
+  become  : yes
+- include : configure.yml
+  become  : yes

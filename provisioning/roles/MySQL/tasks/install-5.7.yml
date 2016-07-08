@@ -1,0 +1,10 @@
+---
+- name      : Add yum repository for MySQL 5.7
+  yum       :
+    name    : http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
+
+- name      : Install MySQL 5.7
+  yum       : name={{ item }}
+  with_items:
+    - mysql-community-server
+    - mysql-community-devel
