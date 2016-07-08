@@ -29,5 +29,6 @@
   become_user : redash
 
 - include     : create-readonly-user.yml
+- include     : setup-datasource.yml
 - include     : setup-supervisor.yml
 - include     : setup-nginx.yml

@@ -17,6 +17,7 @@
     - libffi-devel
     - openssl
     - openssl-devel
+    - freetds-devel
 
 - name: Update setuptools
   pip:

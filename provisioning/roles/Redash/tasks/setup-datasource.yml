@@ -1,0 +1,6 @@
+---
+- name : Install all data source
+  pip :
+    requirements: /opt/redash/current/requirements_all_ds.txt
+  become: yes
+
