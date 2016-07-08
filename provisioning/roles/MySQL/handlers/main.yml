@@ -3,4 +3,5 @@
   service   :
     name    : mysqld
     state   : restarted
+    enabled : yes
   become    : yes

@@ -3,3 +3,5 @@
   become: yes
 - include: setup-redis.yml
   become: yes
+- include: start-service.yml
+  become: yes
