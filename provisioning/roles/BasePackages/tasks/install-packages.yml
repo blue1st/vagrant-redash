@@ -18,6 +18,7 @@
     - openssl
     - openssl-devel
     - freetds-devel
+    - cyrus-sasl-devel
 
 - name: Update setuptools
   pip:

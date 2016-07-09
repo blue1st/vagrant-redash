@@ -27,6 +27,7 @@ stderr_logfile=/opt/redash/logs/api_error.log
 
 [program:redash_celery]
 command=/opt/redash/current/bin/run celery worker --app=redash.worker --beat -c2 -Qqueries,celery --maxtasksperchild=10 -Ofair
+user=redash
 process_name=redash_celery
 numprocs=1
 priority=999
@@ -37,6 +38,7 @@ stderr_logfile=/opt/redash/logs/celery_error.log
 
 [program:redash_celery_scheduled]
 command=/opt/redash/current/bin/run celery worker --app=redash.worker -c2 -Qscheduled_queries --maxtasksperchild=10 -Ofair
+user=redash
 process_name=redash_celery_scheduled
 numprocs=1
 priority=999

@@ -13,4 +13,4 @@
 - name    : Create file for check
   file    :
     path  : /opt/redash/created_admin_user
-    state : file
+    state : touch
