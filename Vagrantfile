@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # port forwardsu
   config.vm.network :forwarded_port, guest: 80, host: 80        # nginx
+  config.vm.network :forwarded_port, guest: 3306, host: 3306    # MySQL
   config.vm.network :forwarded_port, guest: 5432, host: 5432    # PostgreSQL
   config.vm.network :forwarded_port, guest: 6379, host: 6379    # Redis
 
