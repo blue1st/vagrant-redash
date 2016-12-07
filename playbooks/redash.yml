@@ -1,0 +1,5 @@
+- name : Setup Re:dash App Server
+  hosts: redash
+  roles:
+    - BasePackages 
+    - Redash

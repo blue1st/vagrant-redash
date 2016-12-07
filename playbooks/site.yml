@@ -1,0 +1,6 @@
+---
+
+- include: common.yml
+- include: postgresql.yml
+- include: redis.yml
+- include: redash.yml

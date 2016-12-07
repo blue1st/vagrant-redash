@@ -1,0 +1,4 @@
+- name : Setup PostgreSQL Server
+  hosts: postgresql
+  roles:
+    - PostgreSQL 

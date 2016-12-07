@@ -1,0 +1,35 @@
+---
+- name      : Create env file
+  template  :
+    src     : env.j2
+    dest    : /opt/redash/.env
+
+- name      : Create current version directory
+  file      :
+    path    : /opt/redash/redash.{{ redash_version }}
+    state   : directory
+
+- name      : Download Re:dash
+  get_url   :
+    url     : https://github.com/getredash/redash/releases/download/v{{ redash_version }}/redash.{{ redash_version }}.tar.gz
+    dest    : /tmp/redash.{{ redash_version }}.tar.gz
+
+- name      : Unarchive Re:dash
+  unarchive   :
+    src       : /tmp/redash.{{ redash_version }}.tar.gz
+    dest      : /opt/redash/redash.{{ redash_version }}
+    remote_src: yes
+
+- name      : Create link to current version
+  file      :
+    path    : /opt/redash/current
+    src     : /opt/redash/redash.{{ redash_version }}
+    state   : link
+    force   : yes
+
+- name      : Create link to env file
+  file      :
+    path    : /opt/redash/current/.env
+    src     : /opt/redash/.env
+    state   : link
+    force   : yes
