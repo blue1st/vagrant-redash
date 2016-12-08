@@ -35,7 +35,7 @@
   when: created_readonly_user.stdout == '0'
 
 - name: Create metadata
-  command: bin/run ./manage.py ds new -n "re:dash metadata" -t "pg" -o "{\"user\":\"redash_reader\",\"password\":\"{{ redash_reader_password.stdout }}\",\"host\":\"localhost\",\"dbname\":\"redash\"}"
+  command: bin/run ./manage.py ds new  --type "pg" --options "{\"user\":\"redash_reader\",\"password\":\"{{ redash_reader_password.stdout }}\",\"host\":\"localhost\",\"dbname\":\"redash\"}" "re:dash metadata"
   args:
     chdir     : /opt/redash/current
   become      : yes
