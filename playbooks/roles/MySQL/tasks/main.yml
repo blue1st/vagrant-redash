@@ -1,7 +1,0 @@
----
-- include : install-5.7.yml
-  become  : yes
-- include : configure.yml
-  become  : yes
-- include : start-service.yml
-  become  : yes
